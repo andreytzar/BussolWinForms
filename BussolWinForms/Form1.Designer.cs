@@ -339,7 +339,7 @@
             Text = "X";
             TopMost = true;
             TransparencyKey = Color.Green;
-            UseWaitCursor = true;
+ 
             WindowState = FormWindowState.Maximized;
             FormClosing += Form1_FormClosing;
             Load += Form1_Load;

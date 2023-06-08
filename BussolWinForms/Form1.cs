@@ -10,12 +10,15 @@ namespace BussolWinForms
         public Form1()
         {
             InitializeComponent();
-            // StayOnTop.Checked = true;
+            StayOnTop.Checked = false;
+
             Context.Load();
             ListBussols = Context.Settings.Bussols;
             BussolsCombo.Items.AddRange(ListBussols.ToArray());
             components = new System.ComponentModel.Container();
             panel.Location = Context.Settings.PanelLocation;
+
+
         }
 
         private void button5_Click(object sender, EventArgs e) =>
@@ -132,7 +135,7 @@ namespace BussolWinForms
             }
             if (mouseStartDrawScale)
             {
-                addscale=false;
+                addscale = false;
                 mouseStartDrawScale = false;
                 this.BackColor = Color.Green;
                 Opacity = 1;
@@ -141,7 +144,7 @@ namespace BussolWinForms
             }
             if (mouseStartDrawMesure)
             {
-                addmesure=false;
+                addmesure = false;
                 mouseStartDrawMesure = false;
                 this.BackColor = Color.Green;
                 Opacity = 1;
@@ -274,8 +277,8 @@ namespace BussolWinForms
         private void ClearBtn_Click(object sender, EventArgs e)
         {
             BussolsCombo.Items.Clear();
-            if (scale!=null)
-            scale.image =null;
+            if (scale != null)
+                scale.image = null;
             if (mesure != null)
                 mesure.image = null;
             ListBussols.Clear();
@@ -306,10 +309,10 @@ namespace BussolWinForms
         float scalerealsize = 1;
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-           if (float.TryParse(TXTScaleSize.Text, out scalerealsize))
+            if (float.TryParse(TXTScaleSize.Text, out scalerealsize))
             {
                 if (scale == null) return;
-                scale.RealScaleSize=scalerealsize;
+                scale.RealScaleSize = scalerealsize;
                 CalcMesure();
             }
         }
@@ -321,7 +324,7 @@ namespace BussolWinForms
         }
 
     }
-    public class Mesure :    DrawObject
+    public class Mesure : DrawObject
     {
         public override string Name { get; set; } = "Mesure";
         public int Width
@@ -329,14 +332,14 @@ namespace BussolWinForms
             get
             {
                 if (image == null || image.Width <= 0) return 0;
-                return  image.Width;
+                return image.Width;
             }
         }
         public int ScaleStep { get; set; } = 2;
         public int ScaleHeight { get; set; } = 10;
         private Brush BrushBlack = Brushes.Black;
         private Brush BrushWhite = Brushes.White;
-        private Pen PenBlack = new Pen(Color.Black) ;
+        private Pen PenBlack = new Pen(Color.Black);
         private Pen PenWhite = new Pen(Color.White);
         public override void PrepareImage()
         {
@@ -431,7 +434,7 @@ namespace BussolWinForms
         public int Distance { get; set; } = 4000;
         public int CamAngle { get; set; } = 60;
         private Pen PenRect = new Pen(Color.Red, 2);
-      
+
         public void DrawRect(Graphics graph, Color backColor)
         {
             graph.Clear(backColor);
@@ -504,7 +507,7 @@ namespace BussolWinForms
         }
 
     }
-    public class DrawObject:IDisposable
+    public class DrawObject : IDisposable
     {
         public virtual string Name { get; set; } = "Scale";
         [XmlIgnore]
